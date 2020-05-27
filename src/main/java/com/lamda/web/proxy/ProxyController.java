@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 @RestController
 public class ProxyController{
     @Autowired Box<Object> box;
     @Autowired Crawler crawler;
     @Autowired Proxy pxy;
+    @Autowired FileUploader loader;
 
     @PostMapping("/bugsmusic")
     public HashMap<String,Object> bugsmusic(@RequestBody String searchWord){
@@ -28,4 +29,11 @@ public class ProxyController{
         return box.get();
 
     }
+
+    @PostMapping("/soccer")
+    public HashMap<String,Object> soccer(@RequestBody String searchWord){
+        pxy.print("넘어온 키워드: "+searchWord);
+        return null;
+    }
+
 }
