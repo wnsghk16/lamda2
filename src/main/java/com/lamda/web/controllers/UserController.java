@@ -1,7 +1,7 @@
 package com.lamda.web.controllers;
 
-import com.lamda.web.domains.PlayerDTO;
-import com.lamda.web.services.PlayerService;
+import com.lamda.web.domains.UserDTO;
+import com.lamda.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,11 +11,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/players")
-public class PlayerController {
-    @Autowired PlayerService playerService;
+public class UserController {
+    @Autowired
+    UserService userService;
 
     @GetMapping("")
-    public List<PlayerDTO> getAll(){
-        return playerService.retriveAll();
+    public List<UserDTO> getAll(){
+        return userService.retriveAll();
     }
 }

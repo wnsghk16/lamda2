@@ -1,20 +1,20 @@
 package com.lamda.web.serviceImpls;
 
-import com.lamda.web.domains.PlayerDTO;
-import com.lamda.web.mappers.PlayerMapper;
-import com.lamda.web.services.PlayerService;
+import com.lamda.web.domains.UserDTO;
+import com.lamda.web.mappers.UserMapper;
+import com.lamda.web.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class PlayerServiceImpl implements PlayerService {
+public class PlayerServiceImpl implements UserService {
     @Autowired
-    PlayerMapper playerMapper;
+    UserMapper playerMapper;
 
     @Override
-    public List<PlayerDTO> retriveAll() {
+    public List<UserDTO> retriveAll() {
         return playerMapper.selectAll();
     }
 }

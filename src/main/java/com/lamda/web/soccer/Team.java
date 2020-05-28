@@ -2,6 +2,7 @@ package com.lamda.web.soccer;
 
 import javax.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
@@ -10,6 +11,8 @@ import java.util.List;
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity(name="team")
+//@Component
+@Lazy
 public class Team {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long teamNo;
@@ -60,11 +63,11 @@ public class Team {
         this.owner = owner;
     }
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany(mappedBy = "teamOfPlayer")
     private List<Player> players;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="stadium_id") @NotNull
-    private Stadium stadium;
+    private Stadium stadiumOfTeam;
 
 }

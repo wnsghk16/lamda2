@@ -2,8 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lamda.web.mappers.PlayerMapper">
-    <select id="selectAll" resultType="com.lamda.web.domains.PlayerDTO">
+<mapper namespace="com.lamda.web.mappers.UserMapper">
+    <select id="selectAll" resultType="com.lamda.web.domains.UserDTO">
         select
             player_id playerId,
             player_name playerName,

@@ -9,17 +9,13 @@ const state={
 const actions={
     async search({commit},searchWord){
         this.searchWord = searchWord
-        axios.post(state.context+'/soccer',searchWord,{
-            authorization: 'JWT fefege..',
-            Accept : 'application/json',
-            'Content-Type': 'application/json'
-        })
+        axios.get(state.context+'soccer/'+searchWord)
             .then(({data})=>{
                 commit('SEARCH',data)
                 router.push('/')
-        })
+            })
             .catch(()=>{
-                alert('통신 실패')
+                alert('축구 통신 실패')
             })
     }
 }

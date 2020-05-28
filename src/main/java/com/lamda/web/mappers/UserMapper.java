@@ -1,11 +1,11 @@
 package com.lamda.web.mappers;
 
-import com.lamda.web.domains.PlayerDTO;
+import com.lamda.web.domains.UserDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface PlayerMapper {
-    public List<PlayerDTO> selectAll();
+public interface UserMapper {
+    public List<UserDTO> selectAll();
 }

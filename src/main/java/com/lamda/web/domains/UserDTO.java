@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class PlayerDTO {
+public class UserDTO {
     private String playerId, playerName, ePlayerName, nickname, joinYyyy,
             position, backNo, nation, birthDate, solar,
             height, weight, teamId;

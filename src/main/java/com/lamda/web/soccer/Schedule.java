@@ -2,13 +2,16 @@ package com.lamda.web.soccer;
 
 import javax.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
 @Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+//@Component
 @Entity(name="schedule")
+@Lazy
 public class Schedule {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long scheduleNo;
@@ -38,5 +41,5 @@ public class Schedule {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "stadium_id") @NotNull
-    private Stadium stadium;
+    private Stadium stadiumOfSchedule;
 }

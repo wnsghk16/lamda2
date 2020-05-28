@@ -1,36 +1,33 @@
-package com.lamda.web.music;
+package com.lamda.web.navermovie;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
+
 import javax.persistence.*;
 
-
 @Data
-@AllArgsConstructor
 //@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@Entity(name="music")
-@Component @Lazy
-public class Music {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+//@Component
+@Entity(name="movie")
+@Lazy
+public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long musicNo;
     @Column(length = 4, nullable = false)
     private String seq;
-    @Column(length = 200, nullable = false)
-    private String title;
-    @Column(length = 200, nullable = false)
-    private String artists;
     @Column(length = 500, nullable = false)
-    private String thumbnail;
+    private String title;
     @Builder
-    public Music(String seq, String title, String artists,
+    public Movie(String seq, String title, String artists,
                  String thumbnail) {
         this.seq = seq;
         this.title = title;
-        this.artists = artists;
-        this.thumbnail = thumbnail;
     }
-    public Music(){}
+    public Movie(){}
     public Long getMusicNo() {
         return musicNo;
     }
@@ -55,30 +52,12 @@ public class Music {
         this.title = title;
     }
 
-    public String getArtists() {
-        return artists;
-    }
-
-    public void setArtists(String artists) {
-        this.artists = artists;
-    }
-
-    public String getThumbnail() {
-        return thumbnail;
-    }
-
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
-    }
-
     @Override
     public String toString() {
-        return "Music{" +
+        return "Movie{" +
                 "musicNo=" + musicNo +
                 ", seq='" + seq + '\'' +
                 ", title='" + title + '\'' +
-                ", artists='" + artists + '\'' +
-                ", thumbnail='" + thumbnail + '\'' +
                 '}';
     }
 }
