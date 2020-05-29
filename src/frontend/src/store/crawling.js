@@ -4,6 +4,7 @@ import router from '@/router' //절대경로
 const state={
     context:'http://localhost:5000/',
     bugsmusic:[],
+    navermovie:[],
     count : 0,
     searchWord : ''
 }
@@ -11,23 +12,38 @@ const state={
 const actions={
     async search({commit},searchWord){
         state.searchWord = searchWord
-        axios.post(state.context+'/bugsmusic', searchWord,{
-                authorization: 'JWT fefege..',
-                Accept : 'application/json',
-                'Content-Type': 'application/json'
-            })
-            .then(({data})=>{
-                commit('SEARCH',data)
-                router.push('/retriever')
-            })
-            .catch(()=>{
-                alert('통신 실패')
-            })
+        switch (searchWord) {
+            case '네이버영화':
+                axios.get(state.context+`navermovie/${searchWord}`)
+                    .then(({data})=>{
+                        commit('MOVIE_SEARCH',data)
+                        router.push('/retriever')
+                    })
+                    .catch(()=>{
+                        alert('통신 실패')
+                    })
+                break;
+            case '벅스':
+                axios.post(state.context+`bugsmusic`, searchWord,{
+                    authorization: 'JWT fefege..',
+                    Accept : 'application/json',
+                    'Content-Type': 'application/json'
+                })
+                    .then(({data})=>{
+                        commit('MUSIC_SEARCH',data)
+                        router.push('/retriever')
+                    })
+                    .catch(()=>{
+                        alert('통신 실패')
+                    })
+                break;
+
+        }
     }
 }
 
 const mutations={
-    SEARCH(state,data){
+    MUSIC_SEARCH(state,data){
         state.bugsmusic = [] //초기화
         state.count = data.count
         data.list.forEach(
@@ -37,11 +53,22 @@ const mutations={
                 title : item.title,
                 thumbnail : item.thumbnail})}
         )
+    },
+    MOVIE_SEARCH(state,data){
+        state.navermovie = [] //초기화
+        state.count = data.count
+        data.list.forEach(
+            item => {state.navermovie.push({
+                seq : item.seq,
+                title : item.title,
+                rankDate : item.rankDate})}
+        )
     }
 }
 
 const getters={
     bugsmusic : state => state.bugsmusic,
+    navermovie : state => state.navermovie,
     count : state => state.count,
     searchWord : state => state.searchWord
 }

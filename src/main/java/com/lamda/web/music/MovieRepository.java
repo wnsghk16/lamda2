@@ -1,6 +1,6 @@
-package com.lamda.web.navermovie;
+package com.lamda.web.music;
 
-import com.lamda.web.music.Music;
+import com.lamda.web.music.Movie;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

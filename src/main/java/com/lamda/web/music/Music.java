@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 //@NoArgsConstructor(access = AccessLevel.PUBLIC)
-@Entity(name="music")
+@Entity
 @Component @Lazy
 public class Music {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

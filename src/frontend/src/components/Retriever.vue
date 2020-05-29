@@ -37,21 +37,23 @@
         <div v-else>
             <div class="top">
                 <img class="google" src="https://www.google.co.kr/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png" title="Google">
-                <input class="search" v-model="searchWord2" type="text" style=" background-repeat: no-repeat; background-position: 88% 50%, 98% 50%;" title="검색">
+                <input class="search" v-model="searchWord" type="text" style=" background-repeat: no-repeat; background-position: 88% 50%, 98% 50%;" title="검색">
             </div>
-            <h3>검색결과 : {{count2}}</h3>
+            <h3>검색결과 : {{count}}</h3>
             <v-simple-table>
                 <template v-slot:default>
                     <thead>
                     <tr>
                         <th class="text-left">순위</th>
                         <th class="text-left">영화명</th>
+                        <th class="text-left">순위날짜</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr v-for="item of navermovie" :key="item.seq">
                         <td>{{ item.seq }}</td>
                         <td>{{ item.title }}</td>
+                        <td>{{ item.rankDate }}</td>
                     </tr>
                     </tbody>
                 </template>
@@ -80,9 +82,7 @@
                 bugsmusic : (state) => state.crawling.bugsmusic,
                 count : (state) => state.crawling.count,
                 searchWord : (state) => state.crawling.searchWord,
-                navermovie : (state) => state.navermovie.navermovie,
-                count2 : (state) => state.navermovie.count,
-                searchWord2 : (state) => state.navermovie.searchWord
+                navermovie : (state) => state.crawling.navermovie
             })
         }
     }

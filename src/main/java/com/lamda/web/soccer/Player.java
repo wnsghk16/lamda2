@@ -11,7 +11,7 @@ import javax.persistence.*;
 //@AllArgsConstructor
 //@NoArgsConstructor(access = AccessLevel.PUBLIC)
 //@Component
-@Entity(name="player")
+@Entity
 @Lazy
 public class Player {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

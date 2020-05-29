@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name="team")
+@Entity
 //@Component
 @Lazy
 public class Team {

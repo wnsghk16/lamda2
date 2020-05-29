@@ -2,8 +2,8 @@ package com.lamda.web.proxy;
 
 import com.lamda.web.music.Music;
 import com.lamda.web.music.MusicRepository;
-import com.lamda.web.navermovie.Movie;
-import com.lamda.web.navermovie.MovieRepository;
+import com.lamda.web.music.Movie;
+import com.lamda.web.music.MovieRepository;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +11,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 @Component("crawler") @Lazy
 public class Crawler extends Proxy{
@@ -57,12 +55,14 @@ public class Crawler extends Proxy{
                     .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36")
                     .execute();
             Document d = homepage.parse();
-            Elements title = d.select("div.tit3");
+            Elements arr = d.select("div.tit3");
+            Elements date = d.select("p.r_date");
             Movie movie = null;
-            for(int i=0;i < title.size(); i++){
+            for(int i=0;i < arr.size(); i++){
                 movie = new Movie();
                 movie.setSeq(string(i+1));
-                movie.setTitle(title.get(i).text());
+                movie.setTitle(arr.get(i).text());
+                movie.setRankDate(date.get(0).text()); //날짜는 하나뿐이기때문에 0번째꺼만 가져오면됨
                 movieRepository.save(movie);
             }
         }catch(Exception e){

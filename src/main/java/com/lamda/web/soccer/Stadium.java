@@ -10,7 +10,7 @@ import java.util.List;
 
 @Data
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Entity(name="stadium")
+@Entity
 @Lazy
 public class Stadium {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

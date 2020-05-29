@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 //@Component
-@Entity(name="schedule")
+@Entity
 @Lazy
 public class Schedule {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
