@@ -1,16 +1,15 @@
 package com.lamda.web.music;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Data
-//@NoArgsConstructor(access = AccessLevel.PUBLIC)
-//@Component
+@Getter
+@Setter
+@NoArgsConstructor
+@Component
 @Entity
 @Lazy
 public class Movie {
@@ -28,48 +27,5 @@ public class Movie {
         this.seq = seq;
         this.title = title;
         this.rankDate = rankDate;
-    }
-    public Movie(){}
-
-    public Long getMovieNo() {
-        return movieNo;
-    }
-
-    public void setMovieNo(Long movieNo) {
-        this.movieNo = movieNo;
-    }
-
-    public String getSeq() {
-        return seq;
-    }
-
-    public void setSeq(String seq) {
-        this.seq = seq;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getRankDate() {
-        return rankDate;
-    }
-
-    public void setRankDate(String rankDate) {
-        this.rankDate = rankDate;
-    }
-
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "movieNo=" + movieNo +
-                ", seq='" + seq + '\'' +
-                ", title='" + title + '\'' +
-                ", rankDate='" + rankDate + '\'' +
-                '}';
     }
 }

@@ -46,7 +46,7 @@ public class FileUploader extends Proxy{
         Player p = new Player();
         p.setPlayerId(arr[0]);
         p.setPlayerName(arr[1]);
-        p.setePlayerName(arr[3]);
+        p.setEPlayerName(arr[3]);
         p.setNickname(arr[4]);
         p.setJoinYyyy(arr[5]);
         p.setPosition(arr[6]);

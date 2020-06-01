@@ -1,4 +1,4 @@
-package com.lamda.web.domains;
+package com.lamda.web.music;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
@@ -6,5 +6,5 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class MovieDTO {
-    private String seq, rank, title, rankDate;
+    private String movieNo, seq, title, rankDate;
 }

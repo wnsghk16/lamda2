@@ -8,8 +8,10 @@ import org.springframework.stereotype.Component;
 import javax.persistence.*;
 import java.util.List;
 
-@Data
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@Setter
+@NoArgsConstructor
+@Component
 @Entity
 @Lazy
 public class Stadium {

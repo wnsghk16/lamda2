@@ -45,8 +45,8 @@
                     <thead>
                     <tr>
                         <th class="text-left">순위</th>
-                        <th class="text-left">영화명</th>
-                        <th class="text-left">순위날짜</th>
+                        <th class="text-left">영화제목</th>
+                        <th class="text-left">집계날짜</th>
                     </tr>
                     </thead>
                     <tbody>

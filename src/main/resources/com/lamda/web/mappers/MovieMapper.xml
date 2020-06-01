@@ -1,37 +1,39 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.lambda.web.mappers.MovieMapper">
+<mapper namespace="com.lamda.web.mappers.MovieMapper">
     <insert id="insertMovie"
-            parameterType="com.lambda.web.music.MovieDTO">
-        insert rank, title, rank_date into movie
-        values (#{rank},#{title},#{rank_date})
+            parameterType="com.lamda.web.music.MovieDTO">
+        insert seq, title, rank_date into movie
+        values (#{seq},#{title},#{rank_date})
     </insert>
 
     <update id="updateMovie"
-            parameterType="com.lambda.web.music.MovieDTO">
+            parameterType="com.lamda.web.music.MovieDTO">
         update set title = #{title}
         from movie
-        where movie_seq like 'movieSeq'
+        where movie_no like #{movieNo}
     </update>
 
     <delete id="deleteMovie"
-            parameterType="com.lambda.web.music.MovieDTO">
-
+            parameterType="com.lamda.web.music.MovieDTO">
+        delete from movie where movie_no like #{movieNo}
     </delete>
-    <select id="selectMovies" resultType="Movie">
-      select movie_no, seq, title, rank_date
-      from users
-      where id = #{id}
+    <select id="selectMovies" resultType="com.lamda.web.music.MovieDTO"
+            parameterType="com.lamda.web.proxy.Pager">
+      select movie_no movieNo, seq, title, rank_date rankDate
+      from movie
+      limit #{rowStart},#{pageSize}
+
     </select>
-    <select id="selectMovie" resultType="Movie">
-      select id, username, password
-      from users
-      where id = #{id}
+    <select id="selectMovie" resultType="com.lamda.web.music.MovieDTO"
+            parameterType="string">
+       select movie_no movieNo, seq, title, rank_date rankDate
+      from movie
+      where movie_no =#{value}
     </select>
     <select id="count" resultType="int">
-      select id, username, password
-      from users
-      where id = #{id}
+      select count(*)
+      from movie
     </select>
 </mapper>

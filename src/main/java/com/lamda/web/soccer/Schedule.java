@@ -7,9 +7,10 @@ import org.springframework.stereotype.Component;
 
 import javax.persistence.*;
 
-@Data
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
-//@Component
+@Getter
+@Setter
+@NoArgsConstructor
+@Component
 @Entity
 @Lazy
 public class Schedule {

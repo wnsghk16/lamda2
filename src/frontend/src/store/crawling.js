@@ -14,7 +14,8 @@ const actions={
         state.searchWord = searchWord
         switch (searchWord) {
             case '네이버영화':
-                axios.get(state.context+`navermovie/${searchWord}`)
+                alert(`>>> ${searchWord}`)
+                axios.get(state.context+`movie/list/0/${searchWord}`)
                     .then(({data})=>{
                         commit('MOVIE_SEARCH',data)
                         router.push('/retriever')
@@ -55,6 +56,7 @@ const mutations={
         )
     },
     MOVIE_SEARCH(state,data){
+        alert("영화 뮤테이션에서 결과수 : " + data.count)
         state.navermovie = [] //초기화
         state.count = data.count
         data.list.forEach(

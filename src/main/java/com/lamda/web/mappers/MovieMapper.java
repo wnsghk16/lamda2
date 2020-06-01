@@ -1,16 +1,17 @@
 package com.lamda.web.mappers;
 
-import com.lamda.web.domains.MovieDTO;
+import com.lamda.web.music.MovieDTO;
+import com.lamda.web.proxy.Pager;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface MovieMapper {
-    public void insertMovie();
-    public void updateMovie();
-    public void deleteMovie();
-    public List<MovieDTO> selectMovies();
-    public MovieDTO selectMovie(String movieName);
+    public void insertMovie(MovieDTO movie);
+    public void updateMovie(MovieDTO movie);
+    public void deleteMovie(MovieDTO movie);
+    public List<MovieDTO> selectMovies(Pager pager);
+    public MovieDTO selectMovie(String movieSeq);
     public int count();
 }
