@@ -7,7 +7,7 @@ const state={
 }
 
 const actions={
-    async search({commit},searchWord){
+    async find({commit},searchWord){
         this.searchWord = searchWord
         axios.get(state.context+'soccer/'+searchWord)
             .then(({data})=>{
@@ -31,7 +31,7 @@ const getters={
 }
 
 export default {
-    name : 'soccer',
+    name : 'search',
     namespaced : true,
     state,
     actions,
