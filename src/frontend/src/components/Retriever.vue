@@ -59,11 +59,10 @@
                 </template>
             </v-simple-table>
             <div class="text-center">
-                <v-pagination
-                        v-model="page"
-                        :length="15"
-                        :total-visible="7"
-                ></v-pagination>
+                <span v-if ='existPrev' style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">이전</span>
+                <span v-for='i of 5' :key="i" style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">{{i + 5}}</span>
+                <span v-if ='existNext' style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">다음</span>
+                <!--<v-pagination v-model="page" :length="5" :total-visible="5"></v-pagination>-->
             </div>
         </div>
     </div>
@@ -74,8 +73,14 @@
     export default {
         data () {
             return {
-                page : 1
+                page : 0,
+                existPrev : false,
+                existNext : true,
+                arr: [6,7,8,9,10]
             }
+        },
+        created() {
+            this.$store.dispatch("search/movies", this.searchWord, this.pageNumber)
         },
         computed : {
             ...mapState({

@@ -18,11 +18,10 @@ public class MovieController{
     @Autowired Pager pager;
     @Autowired MovieMapper movieMapper;
     @Autowired Proxy pxy;
-    @Autowired
-    Box<Object> box;
-    @GetMapping("/list/{pageNumber}/{searchWord}")
-    public Map<?,?> list(@PathVariable("pageNumber") String pageNumber,
-                              @PathVariable("searchWord") String searchWord){
+    @Autowired Box<Object> box;
+    @GetMapping("/{searchWord}/{pageNumber}")
+    public Map<?,?> list(@PathVariable("searchWord") String searchWord,
+                         @PathVariable("pageNumber") String pageNumber){
         if(searchWord.equals("")){//서치워드가 없으면
             pxy.print("검색어가 없음");
         }else{
@@ -31,6 +30,7 @@ public class MovieController{
         pager.setPageNow(pxy.integer(pageNumber));
         pager.setBlockSize(5);
         pager.setPageSize(5);
+        pager.paging();
         IFunction<Pager,List<MovieDTO>> f = p-> movieMapper.selectMovies(p);
         List<MovieDTO> l = f.apply(pager);
         pxy.print("******************");
@@ -38,7 +38,7 @@ public class MovieController{
             pxy.print(m.toString());
         }
         box.clear();
-        box.put("count",l.size());
+        box.put("pager",pager);
         box.put("list",l);
         return box.get();
     }

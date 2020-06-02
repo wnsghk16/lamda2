@@ -1,28 +1,35 @@
-import axios from 'axios'
 import router from '../router'
 
 const state={
-    context:'http://localhost:5000/',
-    searchWord:''
+    context:'http://localhost:5000',
+    searchWord:'null',
+    pageNumber:0,
+    movies : [],
+    musics : [],
+    soccers : [],
+    pager:{}
+
 }
 
 const actions={
     async find({commit},searchWord){
-        this.searchWord = searchWord
-        axios.get(state.context+'soccer/'+searchWord)
-            .then(({data})=>{
-                commit('SEARCH',data)
-                router.push('/')
-            })
-            .catch(()=>{
-                alert('축구 통신 실패')
-            })
+        commit("SEARCHWORD",searchWord)
+        switch(searchWord){
+            case '영화' : router.push("/movie")
+                break;
+            case '음악' : router.push("/music")
+                break;
+            case '축구' : router.push("/soccer")
+                break;
+        }
+
     }
 }
 
 const mutations={
-    SEARCH(){
-        alert('soccer mutations')
+    SEARCHWORD(state, data){
+        alert(`뮤테이션:: ${data}`)
+        state.searchWord = data
     }
 }
 
