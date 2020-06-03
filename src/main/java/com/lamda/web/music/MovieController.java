@@ -19,6 +19,7 @@ public class MovieController{
     @Autowired MovieMapper movieMapper;
     @Autowired Proxy pxy;
     @Autowired Box<Object> box;
+
     @GetMapping("/{searchWord}/{pageNumber}")
     public Map<?,?> list(@PathVariable("searchWord") String searchWord,
                          @PathVariable("pageNumber") String pageNumber){
@@ -27,6 +28,7 @@ public class MovieController{
         }else{
             pxy.print("검색어가 " + searchWord);
         }
+        pxy.print("넘어온 페이지번호 : "+pageNumber);
         pager.setPageNow(pxy.integer(pageNumber));
         pager.setBlockSize(5);
         pager.setPageSize(5);

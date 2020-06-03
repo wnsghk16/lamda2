@@ -25,7 +25,7 @@
         </v-simple-table>
         <div class="text-center">
             <span v-if ='pager.existPrev' style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">이전</span>
-            <span v-for='i of pages' :key="i" style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">{{i}}</span>
+            <span @click="transferPage(i)" v-for='i of pages' :key="i" style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">{{i}}</span>
             <span v-if ='pager.existNext' style="width: 50px; height: 50px; border: 1px solid black;margin-right: 5px">다음</span>
         </div>
     </div>
@@ -47,11 +47,11 @@
         created() {
             axios
             .get(`${this.$store.state.search.context}/movie/${this.$store.state.search.searchWord}/${this.$store.state.search.pageNumber}`)
-            .then(res=>{
-                res.data.list.forEach(elem=>{this.list.push(elem)})
-                this.pager = res.data.pager
+            .then(({data})=>{
+                data.list.forEach(elem=>{this.list.push(elem)})
+                this.pager = data.pager
                 let i =this.pager.pageStart+1
-                let arr = []
+                const arr = []
                 for(;i<=this.pager.pageEnd+1;i++){
                     arr.push(i)
                 }
@@ -63,10 +63,15 @@
         },
         computed : {
             ...mapState({
-                count : (state) => state.crawling.count,
-                searchWord : (state) => state.crawling.searchWord,
-                navermovie : (state) => state.crawling.navermovie
+                searchWord : state => state.search.searchWord,
+                list : state => state.search.movies
             })
+        },
+        methods:{
+            transferPage(i){
+                alert(`이동페이지 ${i-1}`)
+                this.$store.dispatch('search/transferPage',{cate:'movie',searchWord:'null',pageNumber:i-1})
+            }
         }
     }
 </script>
