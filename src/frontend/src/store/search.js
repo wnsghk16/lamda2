@@ -5,9 +5,8 @@ const state={
     context:'http://localhost:5000',
     searchWord:'null',
     pageNumber:0,
-    movies : [],
-    musics : [],
-    soccers : [],
+    list : [],
+    pages : [],
     pager:{}
 
 }
@@ -41,7 +40,7 @@ const mutations={
     },
     TRANSFER(state,data){
         state.pager = data.pager
-        state.movies = data.list
+        state.list = data.list
     }
 }
 

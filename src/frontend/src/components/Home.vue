@@ -42,13 +42,6 @@
     methods : {
       search(){
         this.$store.dispatch('search/find',this.searchWord )
-        /*if(this.searchWord === '벅스뮤직'){
-          this.$store.dispatch("crawling/search", this.searchWord)
-        }else if(this.searchWord === '축구'){
-          this.$store.dispatch("soccer/search", this.searchWord)
-        }else if(this.searchWord === '네이버영화'){
-          alert("검색단어:"+ this.searchWord)
-          this.$store.dispatch("crawling/search", this.searchWord)*/
       }
     }
   }

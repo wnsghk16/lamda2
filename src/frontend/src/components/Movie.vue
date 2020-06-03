@@ -5,6 +5,7 @@
             <input class="search" v-model="searchWord" type="text" style=" background-repeat: no-repeat; background-position: 88% 50%, 98% 50%;" title="검색">
         </div>
         <h3>총게시글수 : {{pager.rowCount}}</h3>
+        <a @click="myAlert('aaa')">테스트</a>
         <v-simple-table>
             <template v-slot:default>
                 <thead>
@@ -33,38 +34,23 @@
 
 <script>
     import {mapState} from 'vuex'
-    import axios from 'axios'
+    import {proxy} from './mixins/proxy'
     export default {
-        data () {
-            return {
-                page : 0,
-                pages: [],
-                list:[],
-                pager: {},
-                totalCount: ''
-            }
-        },
+        mixins : [proxy],
         created() {
-            axios
-            .get(`${this.$store.state.search.context}/movie/${this.$store.state.search.searchWord}/${this.$store.state.search.pageNumber}`)
-            .then(({data})=>{
-                data.list.forEach(elem=>{this.list.push(elem)})
-                this.pager = data.pager
-                let i =this.pager.pageStart+1
-                const arr = []
-                for(;i<=this.pager.pageEnd+1;i++){
-                    arr.push(i)
-                }
-                this.pages = arr
-            })
-            .catch(err=>{
-                alert(`영화 통신 실패 ${err}`)
-            })
+            console.log(`페이지 가기 전: `)
+            let json = proxy.methods.paging(`${this.$store.state.search.context}/movie/null/0`)
+            this.$store.state.search.list = json.movies
+            this.$store.state.search.pages = json.pages
+            this.$store.state.search.pager = json.temp
+            console.log(`페이지 다녀온 다음: ${json.temp.pageSize}`)
         },
         computed : {
             ...mapState({
-                searchWord : state => state.search.searchWord,
-                list : state => state.search.movies
+                list : state => state.search.list,
+                pages : state => state.search.pages,
+                pager : state => state.search.pager,
+                searchWord : state => state.search.searchWord
             })
         },
         methods:{
@@ -74,6 +60,7 @@
             }
         }
     }
+
 </script>
 
 <style scoped>
