@@ -27,7 +27,7 @@ public class Pager {
         //pageSize = 5;
         pageStart = blockSize * blockNow;
         pageEnd = (blockNow != (blockCount-1)) ? pageStart + (blockSize-1): pageCount-1;
-        //pageNow = 0;
+        //pageNow = 5;
         blockCount = (pageCount % blockSize != 0) ? pageCount/blockSize+1: pageCount/blockSize;
         //blockSize = 5;
         prevBlock = pageStart - blockSize;

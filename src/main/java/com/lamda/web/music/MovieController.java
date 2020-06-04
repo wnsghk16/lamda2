@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 
 @CrossOrigin(origins = "http://localhost:8080", allowedHeaders = "*")
 @RestController
@@ -23,10 +24,12 @@ public class MovieController{
     @GetMapping("/{searchWord}/{pageNumber}")
     public Map<?,?> list(@PathVariable("searchWord") String searchWord,
                          @PathVariable("pageNumber") String pageNumber){
-        if(searchWord.equals("")){//서치워드가 없으면
+        if(searchWord.equals("null")){//서치워드가 없으면
             pxy.print("검색어가 없음");
+            pager.setSearchWord("");
         }else{
             pxy.print("검색어가 " + searchWord);
+            pager.setSearchWord(searchWord);
         }
         pxy.print("넘어온 페이지번호 : "+pageNumber);
         pager.setPageNow(pxy.integer(pageNumber));
@@ -43,5 +46,10 @@ public class MovieController{
         box.put("pager",pager);
         box.put("list",l);
         return box.get();
+    }
+
+    @GetMapping("/{searchWord}")
+    public MovieDTO retrieveOne(@PathVariable String searchWord){
+        return movieMapper.selectMovie(searchWord);
     }
 }

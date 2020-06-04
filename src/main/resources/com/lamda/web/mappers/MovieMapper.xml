@@ -23,6 +23,9 @@
             parameterType="com.lamda.web.proxy.Pager">
       select movie_no movieNo, seq, title, rank_date rankDate
       from movie
+      <if test="searchWord != null">
+          where title like '%${searchWord}%'
+      </if>
       limit #{rowStart},#{pageSize}
 
     </select>
@@ -30,7 +33,7 @@
             parameterType="string">
        select movie_no movieNo, seq, title, rank_date rankDate
       from movie
-      where movie_no =#{value}
+      where movie_no = #{value}
     </select>
     <select id="count" resultType="int">
       select count(*)
