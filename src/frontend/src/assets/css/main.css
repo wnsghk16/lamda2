@@ -1,0 +1,74 @@
+.top  {
+    margin-top:28px;
+    margin-bottom:28px;
+}
+.logo {
+    vertical-align: middle;
+    margin-left:24px;
+    margin-right:24px;
+}
+#searchWord{
+    display: block;
+    width: 550px;
+    height: 50px;
+    font-size: 15pt;
+    border: 1px solid #EAEAEA;
+}
+.btn_submit {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+}
+button{
+    font-size: 12px;
+    line-height: 16px;
+    color: #000;
+}
+button{
+    margin: 0;
+    padding: 0;
+}
+button {
+    -webkit-appearance: button;
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    cursor: default;
+    background-color: buttonface;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 6px;
+    border : 1px solid #EAEAEA;
+}
+a{
+    text-decoration: none;
+    font-size: 10.5pt;
+    margin: 0px 10px;
+    color: grey;
+}
+a:hover{
+    text-decoration: underline;
+}
+.btn_submit {
+    width: 50px;
+    height: 50px;
+    background-color: #fff;
+}
+#login{
+    background-color: #4485F3;
+    color: #FFFFFF;
+    width: 70px;
+    height: 30px;
+    border: none;
+    vertical-align: middle;
+    margin: 10px 12px 10px 7px;
+    font-weight: bold;
+    font-size: 10pt;
+    border-radius: 2px;
+}

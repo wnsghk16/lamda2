@@ -5,7 +5,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Data
-public class MovieDTO {
-    private String movieNo, seq, title, rankDate;
-    private MusicDTO ost;
+public class MusicDTO {
+    private String musicNo, seq, title, artists, thumbnail;
 }
