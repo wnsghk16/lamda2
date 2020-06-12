@@ -5,6 +5,7 @@ const state={
     context:'http://localhost:5000/',
     bugsmusic:[],
     navermovie:[],
+    owplayers:[],
     count : 0,
     searchWord : ''
 }
@@ -38,7 +39,20 @@ const actions={
                         alert('통신 실패')
                     })
                 break;
-
+            case '선수':
+                axios.post(state.context+`owplayer`, searchWord,{
+                    authorization: 'JWT fefege..',
+                    Accept : 'application/json',
+                    'Content-Type': 'application/json'
+                })
+                    .then(({data})=>{
+                        commit('OWPLAYER_SEARCH',data)
+                        router.push('/owplayers')
+                    })
+                    .catch(()=>{
+                        alert('통신 실패')
+                    })
+                break;
         }
     }
 }
@@ -53,6 +67,18 @@ const mutations={
                 artists : item.artists,
                 title : item.title,
                 thumbnail : item.thumbnail})}
+        )
+    },
+    OWPLAYER_SEARCH(state,data){
+        state.owplayers = [] //초기화
+        state.count = data.count
+        data.list.forEach(
+            item => {state.owplayers.push({
+                player : item.player,
+                name : item.name,
+                hometown : item.hometown,
+                team : item.team,
+                role : item.role})}
         )
     },
     MOVIE_SEARCH(state,data){
@@ -72,7 +98,8 @@ const getters={
     bugsmusic : state => state.bugsmusic,
     navermovie : state => state.navermovie,
     count : state => state.count,
-    searchWord : state => state.searchWord
+    searchWord : state => state.searchWord,
+    owplayers : state => state.owplayers
 }
 
 export default {

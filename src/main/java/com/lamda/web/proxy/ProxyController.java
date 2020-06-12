@@ -1,9 +1,6 @@
 package com.lamda.web.proxy;
 
-import com.lamda.web.music.Music;
-import com.lamda.web.music.MusicRepository;
-import com.lamda.web.music.Movie;
-import com.lamda.web.music.MovieRepository;
+import com.lamda.web.music.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,6 +17,7 @@ public class ProxyController{
     @Autowired Inventory<HashMap<String, String>> inventory;
     @Autowired MusicRepository musicRepository;
     @Autowired MovieRepository movieRepository;
+    @Autowired OWPlayerRepository owPlayerRepository;
 
     @GetMapping("/navermovie/{searchWord}")
     public HashMap<String,Object> navermovie(@PathVariable String searchWord){
@@ -53,6 +51,18 @@ public class ProxyController{
         return null;
     }
 
+    @PostMapping("/owplayer")
+    public HashMap<String,Object> owplayers(@RequestBody String searchWord){
+        pxy.print("넘어온 키워드: "+searchWord);
+        box.clear();
+        if(owPlayerRepository.count() == 0){
+            crawler.owPlayer();
+        }
+        List<OWPlayer> list = owPlayerRepository.findAll();
+        box.put("list", list);
+        box.put("count", list.size());
+        return box.get();
 
+    }
 
 }

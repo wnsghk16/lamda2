@@ -1,9 +1,6 @@
 package com.lamda.web.proxy;
 
-import com.lamda.web.music.Music;
-import com.lamda.web.music.MusicRepository;
-import com.lamda.web.music.Movie;
-import com.lamda.web.music.MovieRepository;
+import com.lamda.web.music.*;
 import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,7 @@ public class Crawler extends Proxy{
     @Autowired Box<String> box;
     @Autowired MusicRepository musicRepository;
     @Autowired MovieRepository movieRepository;
+    @Autowired OWPlayerRepository owPlayerRepository;
 
     public void bugsMusic(){
         inventory.clear();
@@ -71,4 +69,38 @@ public class Crawler extends Proxy{
         print("******************** 크롤링 결과 *****************\n");
     }
 
+    public void owPlayer(){
+        inventory.clear();
+        try{
+            String url = "https://overwatchleague.com/en-us/players";
+            Connection.Response homepage = Jsoup.connect(url).method(Connection.Method.GET)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36")
+                    .execute();
+            Document d = homepage.parse();
+            Elements player = d.select("a.players-liststyles__PlayerCard-sc-1jhwo3g-21 VGXqA table-cardstyles__Player-sc-2s08up-0 cEZKBC");
+            Elements name = d.select("a.players-liststyles__Link-sc-1jhwo3g-14 CQTPb");
+            Elements hometown = d.select("div.players-liststyles__HometownCell-sc-1jhwo3g-8 ghvQQY table-cellstyles__Container-sc-1k1ivbt-0 gtVrBZ");
+            Elements team = d.select("a.players-liststyles__TeamCard-sc-1jhwo3g-22 gzyPNZ table-cardstyles__Player-sc-2s08up-0 cEZKBC");
+            Elements role = d.select("a.players-liststyles__RoleCell-sc-1jhwo3g-10 FCRbg table-cellstyles__Container-sc-1k1ivbt-0 jUsODt");
+            OWPlayer owPlayer = null;
+            for(int i=0;i < player.size(); i++){
+                owPlayer = new OWPlayer();
+                owPlayer.setPlayer(player.get(i).text());
+                owPlayer.setPlayerpic(player.get(i).select("img").attr("src"));
+                owPlayer.setName(name.get(i).text());
+                owPlayer.setHometown(hometown.get(i).text());
+                owPlayer.setTeampic(team.get(i).select("img").attr("src"));
+                owPlayer.setTeam(team.get(i).text());
+                owPlayer.setRoleicon(role.get(i).select("img").attr("src"));
+                owPlayer.setRole(role.get(i).text());
+
+                owPlayerRepository.save(owPlayer);
+            }
+        }catch(Exception e){
+            print("에러 발생");
+        }
+        print("******************** 크롤링 결과 *****************\n");
+        //inventory.get().forEach(System.out::print);
+        //print(inventory.get().get(0).toString());
+    }
 }
