@@ -74,10 +74,13 @@ const mutations={
         state.count = data.count
         data.list.forEach(
             item => {state.owplayers.push({
+                playerpic : item.playerpic,
                 player : item.player,
                 name : item.name,
                 hometown : item.hometown,
+                teampic : item.teampic,
                 team : item.team,
+                roleicon : item.roleicon,
                 role : item.role})}
         )
     },

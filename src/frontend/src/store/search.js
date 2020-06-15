@@ -22,6 +22,8 @@ const actions={
                 break;
             case '축구' : router.push("/soccer")
                 break;
+            case '선수' : router.push("/owplayers")
+                break;
         }
     },
     async transferPage({commit},payload){

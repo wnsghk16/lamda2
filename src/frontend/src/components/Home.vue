@@ -41,7 +41,8 @@
     },
     methods : {
       search(){
-        this.$store.dispatch('search/find',this.searchWord )
+        this.$store.dispatch('crawling/search',this.searchWord )
+        //this.$store.dispatch('search/find',this.searchWord )
       }
     }
   }

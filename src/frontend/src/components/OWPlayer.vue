@@ -9,19 +9,25 @@
             <template v-slot:default>
                 <thead>
                 <tr>
+                    <th class="text-left">PlayerPic</th>
                     <th class="text-left">Player</th>
                     <th class="text-left">Name</th>
                     <th class="text-left">Hometown</th>
+                    <th class="text-left">TeamPic</th>
                     <th class="text-left">Team</th>
+                    <th class="text-left">RoleIcon</th>
                     <th class="text-left">Role</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr v-for="item of owplayers" :key="item.player">
+                    <td>{{ item.playerpic }}</td>
                     <td>{{ item.player }}</td>
                     <td>{{ item.name }}</td>
                     <td>{{ item.hometown }}</td>
+                    <td>{{ item.teampic }}</td>
                     <td>{{ item.team }}</td>
+                    <td>{{ item.roleicon }}</td>
                     <td>{{ item.role }}</td>
                 </tr>
                 </tbody>

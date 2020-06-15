@@ -83,7 +83,7 @@ public class Crawler extends Proxy{
             Elements team = d.select("a.players-liststyles__TeamCard-sc-1jhwo3g-22 gzyPNZ table-cardstyles__Player-sc-2s08up-0 cEZKBC");
             Elements role = d.select("a.players-liststyles__RoleCell-sc-1jhwo3g-10 FCRbg table-cellstyles__Container-sc-1k1ivbt-0 jUsODt");
             OWPlayer owPlayer = null;
-            for(int i=0;i < player.size(); i++){
+            for(int i=0;i < name.size(); i++){
                 owPlayer = new OWPlayer();
                 owPlayer.setPlayer(player.get(i).text());
                 owPlayer.setPlayerpic(player.get(i).select("img").attr("src"));
@@ -94,12 +94,15 @@ public class Crawler extends Proxy{
                 owPlayer.setRoleicon(role.get(i).select("img").attr("src"));
                 owPlayer.setRole(role.get(i).text());
 
+                print("******************** djdjd결과 *****************\n");
+                print(owPlayer.toString());
+
                 owPlayerRepository.save(owPlayer);
             }
         }catch(Exception e){
             print("에러 발생");
         }
-        print("******************** 크롤링 결과 *****************\n");
+        print("******************** 선수 크롤링 결과 *****************\n");
         //inventory.get().forEach(System.out::print);
         //print(inventory.get().get(0).toString());
     }
