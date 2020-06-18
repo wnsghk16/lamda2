@@ -6,12 +6,12 @@ import org.springframework.stereotype.Component;
 @Component
 @Data
 public class OWPlayerDTO {
-    private String playerpic,
+    private String id,
+            playerimg,
             player,
             name,
             hometown,
-            teampic,
+            teamimg,
             team,
-            roleicon,
             role;
 }

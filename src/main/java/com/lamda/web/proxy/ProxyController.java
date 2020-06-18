@@ -1,6 +1,10 @@
 package com.lamda.web.proxy;
 
 import com.lamda.web.music.*;
+import com.lamda.web.serviceImpls.OWPlayerServiceImpl;
+import com.lamda.web.serviceImpls.OWTeamServiceImpl;
+import com.lamda.web.services.OWPlayerService;
+import com.lamda.web.services.OWTeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +22,8 @@ public class ProxyController{
     @Autowired MusicRepository musicRepository;
     @Autowired MovieRepository movieRepository;
     @Autowired OWPlayerRepository owPlayerRepository;
+    @Autowired OWTeamServiceImpl owTeamService;
+    @Autowired LolRepository lolRepository;
 
     @GetMapping("/navermovie/{searchWord}")
     public HashMap<String,Object> navermovie(@PathVariable String searchWord){
@@ -29,7 +35,19 @@ public class ProxyController{
         box.put("count", list.size());
         return box.get();
     }
-
+    @GetMapping("/owplayer/{searchWord}")
+    public HashMap<String,Object> owplayers(@PathVariable String searchWord){
+        pxy.print("넘어온 키워드: "+searchWord);
+        box.clear();
+        if(owPlayerRepository.count() == 0){
+            crawler.owPlayer();
+        }
+        List<OWPlayer> list = owPlayerRepository.findAll();
+        pxy.print(owPlayerRepository.findAll().toString());
+        box.put("list", list);
+        box.put("count", list.size());
+        return box.get();
+    }
     @PostMapping("/bugsmusic")
     public HashMap<String,Object> bugsmusic(@RequestBody String searchWord){
         pxy.print("넘어온 키워드: "+searchWord);
@@ -51,14 +69,27 @@ public class ProxyController{
         return null;
     }
 
-    @PostMapping("/owplayer")
-    public HashMap<String,Object> owplayers(@RequestBody String searchWord){
+    @PostMapping("/owteam")
+    public HashMap<String,Object> owteams(@RequestBody String searchWord){
         pxy.print("넘어온 키워드: "+searchWord);
         box.clear();
-        if(owPlayerRepository.count() == 0){
-            crawler.owPlayer();
+        List<OWTeamDTO> list = owTeamService.retriveAll();
+        box.put("list", list);
+        box.put("count", list.size());
+        return box.get();
+
+    }
+
+    @PostMapping("/lolrank")
+    public HashMap<String,Object> lolranking(@RequestBody String searchWord){
+        pxy.print("넘어온 키워드: "+searchWord);
+        box.clear();
+        if(lolRepository.count() == 0){
+            crawler.lolRanking();
         }
-        List<OWPlayer> list = owPlayerRepository.findAll();
+        List<Lol> list = lolRepository.findAll();
+        pxy.print(lolRepository.findAll().toString());
+//        List<OWPlayerDTO> list = owPlayerService.retriveAll();
         box.put("list", list);
         box.put("count", list.size());
         return box.get();

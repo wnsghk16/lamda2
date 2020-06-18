@@ -6,6 +6,8 @@ const state={
     bugsmusic:[],
     navermovie:[],
     owplayers:[],
+    owteams:[],
+    lol : [],
     count : 0,
     searchWord : ''
 }
@@ -16,10 +18,21 @@ const actions={
         switch (searchWord) {
             case '네이버영화':
                 alert(`>>> ${searchWord}`)
-                axios.get(state.context+`movie/list/0/${searchWord}`)
+                axios.get(state.context+`navermovie/${searchWord}`)
                     .then(({data})=>{
                         commit('MOVIE_SEARCH',data)
                         router.push('/retriever')
+                    })
+                    .catch(()=>{
+                        alert('통신 실패')
+                    })
+                break;
+            case '선수':
+                alert(`>>> ${searchWord}`)
+                axios.get(state.context+`owplayer/${searchWord}`)
+                    .then(({data})=>{
+                        commit('OWPLAYER_SEARCH',data)
+                        router.push('/owplayer')
                     })
                     .catch(()=>{
                         alert('통신 실패')
@@ -39,15 +52,30 @@ const actions={
                         alert('통신 실패')
                     })
                 break;
-            case '선수':
-                axios.post(state.context+`owplayer`, searchWord,{
+
+            case '승규':
+                axios.post(state.context+`lolrank`, searchWord,{
                     authorization: 'JWT fefege..',
                     Accept : 'application/json',
                     'Content-Type': 'application/json'
                 })
                     .then(({data})=>{
-                        commit('OWPLAYER_SEARCH',data)
-                        router.push('/owplayers')
+                        commit('LOL_SEARCH',data)
+                        router.push('/lol')
+                    })
+                    .catch(()=>{
+                        alert('통신 실패')
+                    })
+                break;
+            case '팀':
+                axios.post(state.context+`owteam`, searchWord,{
+                    authorization: 'JWT fefege..',
+                    Accept : 'application/json',
+                    'Content-Type': 'application/json'
+                })
+                    .then(({data})=>{
+                        commit('OWTEAM_SEARCH',data)
+                        router.push('/owteams')
                     })
                     .catch(()=>{
                         alert('통신 실패')
@@ -70,18 +98,27 @@ const mutations={
         )
     },
     OWPLAYER_SEARCH(state,data){
+        alert("owplayer 뮤테이션 진입")
         state.owplayers = [] //초기화
         state.count = data.count
         data.list.forEach(
             item => {state.owplayers.push({
-                playerpic : item.playerpic,
+                playerimg : item.playerimg,
                 player : item.player,
                 name : item.name,
                 hometown : item.hometown,
-                teampic : item.teampic,
+                teamimg : item.teamimg,
                 team : item.team,
-                roleicon : item.roleicon,
                 role : item.role})}
+        )
+    },
+    OWTEAM_SEARCH(state,data){
+        state.owteams = [] //초기화
+        state.count = data.count
+        data.list.forEach(
+            item => {state.owteams.push({
+                teamimg : item.teamimg,
+                team : item.team})}
         )
     },
     MOVIE_SEARCH(state,data){
@@ -94,15 +131,29 @@ const mutations={
                 title : item.title,
                 rankDate : item.rankDate})}
         )
-    }
+    },
+    LOL_SEARCH(state,data){
+        alert("롤 뮤테이션에서 결과수 : " + data.count)
+        state.lol = [] //초기화
+        state.count = data.count
+        data.list.forEach(
+            item => {state.lol.push({
+                rank : item.rank,
+                name : item.name,
+                win : item.win,
+                lose : item.lose,
+                point : item.point})}
+        )
+    },
 }
 
 const getters={
     bugsmusic : state => state.bugsmusic,
     navermovie : state => state.navermovie,
     count : state => state.count,
-    searchWord : state => state.searchWord,
-    owplayers : state => state.owplayers
+    owplayers : state => state.owplayers,
+    owteams : state => state.owteams,
+    lol : state => state.lol
 }
 
 export default {

@@ -1,11 +1,11 @@
 package com.lamda.web.mappers;
 
-import com.lamda.web.music.OWPlayerDTO;
+import com.lamda.web.music.OWTeamDTO;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
-public interface OWPlayerMapper {
-    public List<OWPlayerDTO> selectAll();
+public interface OWTeamMapper {
+    public List<OWTeamDTO> selectAll();
 }

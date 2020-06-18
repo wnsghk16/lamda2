@@ -30,6 +30,6 @@ export const proxy={
                     alert(`영화 통신 실패 ${err}`)
                 })
             return {movies, pages, temp}
-        }
+        },
     }
 }

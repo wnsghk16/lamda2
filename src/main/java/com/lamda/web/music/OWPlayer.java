@@ -13,38 +13,38 @@ import javax.persistence.*;
 @Entity
 @Component
 @Lazy
+@ToString
 public class OWPlayer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long owplayerNo;
-    @Column(length = 500, nullable = false)
-    private String playerpic;
+    @Column(length = 200, nullable = false)
+    private String id;
     @Column(length = 200, nullable = false)
     private String player;
+    @Column(length = 500, nullable = false)
+    private String playerimg;
     @Column(length = 200, nullable = false)
     private String name;
     @Column(length = 200, nullable = false)
     private String hometown;
     @Column(length = 500, nullable = false)
-    private String teampic;
+    private String teamimg;
     @Column(length = 200, nullable = false)
     private String team;
-    @Column(length = 500, nullable = false)
-    private String roleicon;
     @Column(length = 200, nullable = false)
     private String role;
 
     @Builder
-    public OWPlayer(String playerpic, String player, String name,
-                 String hometown, String teampic, String team,
-                    String roleicon, String role) {
-        this.playerpic = playerpic;
+    public OWPlayer(String id, String playerimg, String player, String name,
+                 String hometown, String teamimg, String team, String role) {
+        this.id = id;
+        this.playerimg = playerimg;
         this.player = player;
         this.name = name;
         this.hometown = hometown;
-        this.teampic = teampic;
+        this.teamimg = teamimg;
         this.team = team;
-        this.roleicon = roleicon;
         this.role = role;
     }
 }

@@ -7,6 +7,9 @@ import Music from "../components/Music";
 import Soccer from "../components/Soccer";
 import MovieDetailDetail from "../components/MovieDetail";
 import OWPlayer from "../components/OWPlayer";
+import OWTeam from "../components/OWTeam";
+import Lol from "../components/Lol";
+import Detail from "../components/Detail";
 
 Vue.use(Router)
 
@@ -19,6 +22,9 @@ export default new Router({
         {path:'/soccer',component:Soccer},
         {path:'/retriever', component:Retriever},
         {path:'/movieDetail', component: MovieDetailDetail},
-        {path:'/owplayers', component: OWPlayer}
+        {path:'/owplayer', component: OWPlayer},
+        {path:'/owteams', component: OWTeam},
+        {path:'/detail', component: Detail},
+        {path:'/lol', component: Lol}
     ]
 })

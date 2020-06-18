@@ -5,13 +5,12 @@
 <mapper namespace="com.lamda.web.mappers.OWPlayerMapper">
     <select id="selectAll" resultType="com.lamda.web.music.OWPlayerDTO">
         select
-            playerpic,
+            playerimg,
             player,
             name,
             hometown,
-            teampic,
+            teamimg,
             team,
-            roleicon,
             role
         from owplayer
     </select>

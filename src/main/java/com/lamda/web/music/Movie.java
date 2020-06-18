@@ -20,7 +20,7 @@ public class Movie {
     private String seq;
     @Column(length = 100)
     private String title;
-    @Column(length = 10)
+    @Column(length = 100)
     private String rankDate;
     @Builder
     public Movie(String seq, String title, String rankDate) {
