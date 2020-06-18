@@ -7,7 +7,7 @@
         >
             <template slot="items" slot-scope="props">
                 <td>{{ props.item.playerimg }}</td>
-                <td class="text-xs-right">{{ tableItems.player }}</td>
+                <td class="text-xs-right">{{ props.player }}</td>
                 <td class="text-xs-right">{{ props.item.name }}</td>
                 <td class="text-xs-right">{{ props.item.hometown }}</td>
                 <td class="text-xs-right">{{ props.item.teamimg }}</td>
@@ -20,6 +20,8 @@
 </template>
 
 <script>
+    import {mapState} from "vuex";
+
     export default {
         data () {
             return {
@@ -29,34 +31,22 @@
                         text: 'PlayerImg',
                         align: 'left',
                         sortable: false,
-                        value: 'name'
+                        value: 'playerimg'
                     },
-                    { text: 'Player', value: 'Player' },
-                    { text: 'Name', value: 'Name' },
-                    { text: 'Hometown', value: 'Hometown' },
-                    { text: 'TeamImg', value: 'TeamImg' },
-                    { text: 'Team', value: 'Team' },
-                    { text: 'Role', value: 'Role' }
+                    { text: 'Player', value: 'player' },
+                    { text: 'Name', value: 'name' },
+                    { text: 'Hometown', value: 'hometown' },
+                    { text: 'TeamImg', value: 'teamimg' },
+                    { text: 'Team', value: 'team' },
+                    { text: 'Role', value: 'role' }
                 ],
-                tableItems : []
+
             }
         },
-        created() {
-            for(var i=0;i<this.$store.state.crawling.count;i++){
-                this.$store.state.crawling.owplayers.forEach(
-                    item => {this.tableItems.push({
-                        playerimg : item.playerimg,
-                        player : item.player,
-                        name : item.name,
-                        hometown : item.hometown,
-                        teamimg : item.teamimg,
-                        team : item.team,
-                        role : item.role
-                    })},
-                )
-                // console.log(this.$store.state.crawling.owplayers)
-            }
-
+        computed : {
+            ...mapState({
+                tableItems : (state) => state.crawling.owplayers,
+            })
         },
         updated () {
             console.log('updated')
